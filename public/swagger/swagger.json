@@ -1,0 +1,150 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "TestSymfony test keyopstech",
+        "description": "Creation d'API pour le test keyopstech",
+        "version": "0.1"
+    },
+    "host": "localhost:8000",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/api/parcels/{id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id parcel",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details parcel",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/default"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/login_check": {
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "parameter": "username",
+                        "name": "username",
+                        "in": "formData",
+                        "description": "username",
+                        "type": "string"
+                    },
+                    {
+                        "parameter": "password",
+                        "name": "password",
+                        "in": "formData",
+                        "description": "paswword",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Authentification",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/default"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "formData",
+                        "description": "Email",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ajout utilisateur",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/default"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "default": {
+            "properties": {
+                "success": {
+                    "description": "state request",
+                    "type": "boolean"
+                },
+                "code": {
+                    "description": "state request",
+                    "type": "number",
+                    "default": 200
+                },
+                "data": {
+                    "description": "",
+                    "type": "object"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "id": {
+            "name": "id",
+            "in": "path",
+            "description": "Id parcel",
+            "type": "integer"
+        },
+        "username": {
+            "name": "username",
+            "in": "formData",
+            "description": "username",
+            "type": "string"
+        },
+        "password": {
+            "name": "password",
+            "in": "formData",
+            "description": "paswword",
+            "type": "string"
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "description": "Value={jwt}",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
